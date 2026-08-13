@@ -20,7 +20,8 @@ export default function Navbar() {
     { name: "Projects", href: "#projects" },
     { name: "Events", href: "#events" },
     { name: "Achievements", href: "#achievements" },
-    { name: "Team", href: "#team" }
+    { name: "Team", href: "#team" },
+    { name: "Upcoming Events", href: "#upcoming-events" }
   ];
 
   return (
@@ -47,7 +48,7 @@ export default function Navbar() {
               </a>
             ))}
             <a 
-              href="#join"
+              href="#footer"
               className="px-6 py-2 border border-white/20 text-xs font-mono font-bold text-white hover:bg-white hover:text-black hover:border-white transition-all interactive uppercase tracking-widest"
             >
               Contact
@@ -97,7 +98,7 @@ export default function Navbar() {
               ))}
               <div className="w-12 h-[2px] bg-[#00d2ff] my-4"></div>
               <a 
-                href="#join"
+                href="#footer"
                 onClick={() => setMobileMenuOpen(false)}
                 className="text-2xl font-bold text-[#00d2ff] uppercase"
               >

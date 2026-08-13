@@ -8,6 +8,7 @@ import Categories from "./components/Categories";
 import ProjectsGallery from "./components/ProjectsGallery";
 import Events from "./components/Events";
 import Achievements from "./components/Achievements";
+import UpcomingEvents from "./components/UpcomingEvents";
 import Team from "./components/Team";
 import Leadership from "./components/Leadership";
 import CallToAction from "./components/CallToAction";
@@ -44,6 +45,7 @@ function App() {
         <ProjectsGallery />
         <Events />
         <Achievements />
+        <UpcomingEvents />
         <Leadership />
         <Team />
         <CallToAction />

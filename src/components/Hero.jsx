@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 
@@ -138,7 +138,7 @@ export default function Hero() {
             muted
             playsInline
             className={`absolute top-0 left-0 w-full h-[115%] object-cover object-top z-10 transition-all duration-700 ${isActivated ? 'brightness-125' : 'brightness-90 group-hover:brightness-100'}`}
-            poster="/images/LOGO_transparent.png" // Fallback poster
+            poster="/images/LOGO_transparent.png"
           />
 
           {/* Hover interaction overlay */}
@@ -168,7 +168,6 @@ export default function Hero() {
           />
         </motion.div>
       </div>
-
     </section>
   );
 }

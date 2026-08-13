@@ -1,107 +1,74 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { team } from "../data/team";
-
-const filters = [
-  "ALL",
-  "LEADERSHIP",
-  "PROJECTS",
-  "DESIGN",
-  "RESEARCH",
-  "MARKETING",
-  "MANAGEMENT",
-  "DEVELOPMENT"
-];
+import { motion } from "framer-motion";
+import { teamData } from "../data/team";
 
 export default function Team() {
-  const [activeFilter, setActiveFilter] = useState("ALL");
-
-  const filteredTeam = activeFilter === "ALL" 
-    ? team 
-    : team.filter(member => member.category === activeFilter);
-
   return (
-    <section id="team" className="py-24 relative overflow-hidden bg-[#0a0a0a] border-t border-white/5">
+    <section id="team" className="relative w-full py-24 bg-[#020202] overflow-hidden border-t border-white/5">
       <div className="max-w-[1400px] mx-auto px-6">
         
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white uppercase mb-4">Team</h2>
-            <div className="w-16 h-[2px] bg-[#00d2ff]"></div>
-          </motion.div>
-
-          {/* Filters */}
-          <div className="flex flex-wrap gap-2">
-            {filters.map((filter) => (
-              <button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                className={`px-3 py-1 text-[10px] font-mono tracking-widest uppercase transition-all duration-300 rounded interactive border ${
-                  activeFilter === filter 
-                    ? "bg-[#00d2ff] text-black border-[#00d2ff]" 
-                    : "bg-transparent text-gray-500 border-white/10 hover:text-white hover:border-white/30"
-                }`}
-              >
-                {filter}
-              </button>
-            ))}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16 md:mb-24 text-center md:text-left flex flex-col items-center md:items-start"
+        >
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-12 h-[1px] bg-[#00d2ff]/50"></div>
+            <h2 className="text-[#00d2ff] font-mono text-sm tracking-widest uppercase">The Core</h2>
           </div>
-        </div>
-
-        {/* Compact Grid */}
-        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          <AnimatePresence>
-            {filteredTeam.map((member) => (
-              <motion.div
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-                key={member.id}
-                className="bg-[#050505] border border-white/5 hover:border-[#00d2ff]/50 rounded-lg p-4 flex items-center gap-4 group transition-all duration-300 relative overflow-hidden cursor-pointer"
-              >
-                {/* Thin cyan line animation on hover */}
-                <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#00d2ff] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#00d2ff] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                <div className="w-12 h-12 rounded overflow-hidden shrink-0 border border-white/10 group-hover:scale-105 transition-transform duration-300 bg-[#111] flex items-center justify-center">
-                  {/* Real Image Slot */}
-                  {member.image ? (
-                    <img 
-                      src={member.image} 
-                      alt={member.name} 
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.nextSibling.style.display = 'flex';
-                      }}
-                    />
-                  ) : null}
-                  {/* Fallback */}
-                  <div className="w-full h-full bg-[#111] text-[#00d2ff] text-[8px] font-mono flex items-center justify-center text-center p-1" style={{display: member.image ? 'none' : 'flex'}}>
-                    PHOTO
-                  </div>
-                </div>
-                
-                <div className="flex flex-col flex-grow">
-                  <h4 className="text-white font-bold text-sm truncate">{member.name}</h4>
-                  <p className="text-[#00d2ff] font-mono text-[10px] uppercase tracking-wider mt-0.5">{member.position}</p>
-                  
-                  {/* Hover expansion data */}
-                  <div className="max-h-0 opacity-0 overflow-hidden group-hover:max-h-20 group-hover:opacity-100 transition-all duration-500 mt-1">
-                    <p className="text-gray-500 font-mono text-[9px] uppercase tracking-wider">{member.department}</p>
-                    <p className="text-gray-500 font-mono text-[9px] uppercase tracking-wider">{member.division}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+          <h3 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter">
+            Team
+          </h3>
         </motion.div>
+
+        {/* 4 Cards Per Row Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {teamData.map((member, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: (index % 4) * 0.15 }}
+              className="group relative bg-[#0a0a0a] border border-white/5 p-4 md:p-5 flex flex-col interactive overflow-hidden transition-all duration-500 hover:border-[#00d2ff]/50 hover:shadow-[0_0_20px_rgba(0,210,255,0.05)]"
+            >
+              {/* Image Area - 60% of card roughly */}
+              <div className="relative w-full aspect-[3/4] overflow-hidden mb-6 bg-[#111]">
+                <img 
+                  src={member.image} 
+                  alt={member.name}
+                  className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMTExIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNSIgZmlsbD0iIzMzMyIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SU1BR0UgVE8gQkUgQURERUQ8L3RleHQ+PC9zdmc+";
+                  }}
+                />
+                
+                {/* Thin cyan border overlay */}
+                <div className="absolute inset-0 border border-transparent group-hover:border-[#00d2ff]/40 transition-colors duration-500 pointer-events-none"></div>
+                
+                {/* Technical Label (appears on hover) */}
+                <div className="absolute top-3 left-3 px-2 py-1 bg-black/80 backdrop-blur-md border border-[#00d2ff]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none translate-y-2 group-hover:translate-y-0">
+                  <span className="font-mono text-[9px] text-[#00d2ff] tracking-widest uppercase">IIRIS MEMBER</span>
+                </div>
+              </div>
+
+              {/* Text Content */}
+              <div className="relative z-10 flex flex-col flex-grow">
+                <h4 className="text-xl font-black text-white uppercase tracking-tight mb-1 group-hover:text-white transition-colors duration-300">
+                  {member.name}
+                </h4>
+                <h5 className="text-gray-400 font-mono text-xs tracking-widest uppercase mb-3 group-hover:text-[#00d2ff] transition-colors duration-300">
+                  {member.role}
+                </h5>
+                <p className="text-gray-600 font-mono text-[10px] tracking-wider uppercase mt-auto">
+                  {member.department}
+                </p>
+              </div>
+
+            </motion.div>
+          ))}
+        </div>
 
       </div>
     </section>

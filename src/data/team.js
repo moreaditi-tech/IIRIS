@@ -1,101 +1,68 @@
-export const team = [
+export const teamData = [
   {
-    id: 1,
     name: "Pratik Lanjewar",
-    position: "President",
-    department: "Computer Engineering",
-    division: "Division C",
-    image: "/images/team/placeholder.jpg",
-    category: "LEADERSHIP"
+    role: "President",
+    department: "Computer Engineering • C",
+    image: "/images/team/pratik.jpg",
   },
   {
-    id: 2,
     name: "Tejas Bankar",
-    position: "Vice President",
+    role: "Vice President",
     department: "Computer Engineering",
-    division: "Division C",
-    image: "/images/team/placeholder.jpg",
-    category: "LEADERSHIP"
+    image: "/images/team/tejas.jpg",
   },
   {
-    id: 3,
     name: "Janvi Mahanwar",
-    position: "Secretary",
-    department: "Computer Science Engineering AI&ML",
-    division: "Division A",
-    image: "/images/team/placeholder.jpg",
-    category: "LEADERSHIP"
+    role: "Secretary",
+    department: "Computer Engineering",
+    image: "/images/team/janvi.jpg",
   },
   {
-    id: 4,
     name: "Kanad Muley",
-    position: "Co-Secretary",
+    role: "Co-Secretary",
     department: "Computer Engineering",
-    division: "Division B",
-    image: "/images/team/placeholder.jpg",
-    category: "LEADERSHIP"
+    image: "/images/team/kanad.jpg",
   },
   {
-    id: 5,
     name: "V Taraksh Prijay",
-    position: "Project Development Head",
-    department: "Electronics & Telecommunication Engineering",
-    division: "Division A",
-    image: "/images/team/placeholder.jpg",
-    category: "PROJECTS"
+    role: "Project Development Head",
+    department: "Computer Engineering",
+    image: "/images/team/taraksh.jpg",
   },
   {
-    id: 6,
     name: "Mayank Bahekar",
-    position: "Project Design Head",
-    department: "Electronics & Telecommunication Engineering",
-    division: "TO BE ADDED",
-    image: "/images/team/placeholder.jpg",
-    category: "PROJECTS"
+    role: "Project Design Head",
+    department: "Computer Engineering",
+    image: "/images/team/mayank.jpg",
   },
   {
-    id: 7,
     name: "Atharv Huigol",
-    position: "Research and Innovation",
-    department: "Electronics & Telecommunication Engineering",
-    division: "Division B",
-    image: "/images/team/placeholder.jpg",
-    category: "RESEARCH"
+    role: "Research and Innovation",
+    department: "Computer Engineering",
+    image: "/images/team/atharv.jpg",
   },
   {
-    id: 8,
     name: "Mohit Desale",
-    position: "Design Head",
-    department: "Electronics & Telecommunication Engineering",
-    division: "TO BE ADDED",
-    image: "/images/team/placeholder.jpg",
-    category: "DESIGN"
+    role: "Design Head",
+    department: "Computer Engineering",
+    image: "/images/team/mohit.jpg",
   },
   {
-    id: 9,
     name: "Yash Gaikwad",
-    position: "Marketing Head",
+    role: "Marketing Head",
     department: "Computer Engineering",
-    division: "Division B",
-    image: "/images/team/placeholder.jpg",
-    category: "MARKETING"
+    image: "/images/team/yash.jpg",
   },
   {
-    id: 10,
     name: "Arpita Nikam",
-    position: "Management Head",
+    role: "Management Head",
     department: "Computer Engineering",
-    division: "Division B",
-    image: "/images/team/placeholder.jpg",
-    category: "MANAGEMENT"
+    image: "/images/team/arpita.jpg",
   },
   {
-    id: 11,
     name: "Aditi More",
-    position: "Application Development",
+    role: "Application Developer Head",
     department: "Computer Engineering",
-    division: "Division A",
-    image: "/images/team/placeholder.jpg",
-    category: "DEVELOPMENT"
+    image: "/images/team/aditi.jpg",
   }
 ];
