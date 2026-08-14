@@ -13,7 +13,7 @@ export const achievements = [
     recipient: "Vaishnavi Kadam & Akshata Majgaonkar",
     details: "Secured internships at SingleSource Electronics",
     event: "Contributing to a live end-of-line industrial project",
-    image: "/images/industryvisit.png"
+    image: "/images/Industry_Visit.jpeg"
   },
   {
     id: "03",
