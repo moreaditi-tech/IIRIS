@@ -58,6 +58,8 @@ export default function DroneModel({ scale = 1, isMobile = false, onActivate }) 
     }
   };
 
+  const dummy = useMemo(() => new THREE.Object3D(), []);
+
   useFrame((state, delta) => {
     const t = state.clock.elapsedTime;
 
@@ -104,7 +106,6 @@ export default function DroneModel({ scale = 1, isMobile = false, onActivate }) 
 
     // 4. Data Trajectory Particles
     if (particlesRef.current) {
-      const dummy = new THREE.Object3D();
       particles.forEach((p, i) => {
         // Update position along curve
         let currentSpeed = p.speed;

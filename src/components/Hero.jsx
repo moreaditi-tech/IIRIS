@@ -137,6 +137,7 @@ export default function Hero() {
             loop
             muted
             playsInline
+            preload="metadata"
             className={`absolute top-0 left-0 w-full h-[115%] object-cover object-top z-10 transition-all duration-700 ${isActivated ? 'brightness-125' : 'brightness-90 group-hover:brightness-100'}`}
             poster="/images/LOGO_transparent.png"
           />

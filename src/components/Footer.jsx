@@ -1,5 +1,5 @@
 import { Mail } from "lucide-react";
-import { FaLinkedin, FaInstagram, FaYoutube, FaGithub } from "react-icons/fa";
+import { FaLinkedin, FaInstagram } from "react-icons/fa";
 import { contacts } from "../data/contact";
 
 export default function Footer() {
@@ -21,7 +21,7 @@ export default function Footer() {
           <div className="flex flex-col">
             <a href="#home" className="flex items-center gap-2 mb-6 group inline-flex hover:opacity-80 transition-opacity">
               <div className="relative rounded-lg p-2 group-hover:shadow-[0_0_20px_#00d2ff] transition-shadow duration-500 border border-transparent group-hover:border-[#00d2ff]/30">
-                <img src="/images/LOGO_transparent.png" alt="IIRIS Logo" className="h-10 md:h-12 object-contain drop-shadow-[0_0_8px_rgba(0,210,255,0.5)]" />
+                <img src="/images/LOGO_transparent.png" alt="IIRIS Logo" loading="lazy" decoding="async" className="h-10 md:h-12 object-contain drop-shadow-[0_0_8px_rgba(0,210,255,0.5)]" />
               </div>
             </a>
             
@@ -67,21 +67,21 @@ export default function Footer() {
             </h4>
             
             <div className="space-y-6">
-              {/* Secretary */}
+              {/* President */}
               <div>
-                <h5 className="text-white font-mono text-xs uppercase tracking-widest mb-1">{contacts.secretary.role}</h5>
-                <div className="text-gray-300 font-bold mb-1">{contacts.secretary.name}</div>
-                <a href={`mailto:${contacts.secretary.email}`} className="text-gray-500 hover:text-[#00d2ff] transition-colors text-sm break-all interactive">
-                  {contacts.secretary.email}
+                <h5 className="text-white font-mono text-xs uppercase tracking-widest mb-1">{contacts.president.role}</h5>
+                <div className="text-gray-300 font-bold mb-1">{contacts.president.name}</div>
+                <a href={`mailto:${contacts.president.email}`} className="text-gray-500 hover:text-[#00d2ff] transition-colors text-sm break-all interactive">
+                  {contacts.president.email}
                 </a>
               </div>
 
-              {/* Co-Secretary */}
+              {/* Vice President */}
               <div>
-                <h5 className="text-white font-mono text-xs uppercase tracking-widest mb-1">{contacts.coSecretary.role}</h5>
-                <div className="text-gray-300 font-bold mb-1">{contacts.coSecretary.name}</div>
-                <a href={`mailto:${contacts.coSecretary.email}`} className="text-gray-500 hover:text-[#00d2ff] transition-colors text-sm break-all interactive">
-                  {contacts.coSecretary.email}
+                <h5 className="text-white font-mono text-xs uppercase tracking-widest mb-1">{contacts.vicePresident.role}</h5>
+                <div className="text-gray-300 font-bold mb-1">{contacts.vicePresident.name}</div>
+                <a href={`mailto:${contacts.vicePresident.email}`} className="text-gray-500 hover:text-[#00d2ff] transition-colors text-sm break-all interactive">
+                  {contacts.vicePresident.email}
                 </a>
               </div>
 
@@ -110,10 +110,8 @@ export default function Footer() {
 
           {/* Social Links Secondary */}
           <div className="flex items-center gap-4 text-gray-500">
-            <a href="#" className="hover:text-[#00d2ff] transition-colors interactive"><FaInstagram className="w-5 h-5" /></a>
+            <a href="https://www.instagram.com/iiris_pccoe?igsh=d29uajQxNXNpeDVw" className="hover:text-[#00d2ff] transition-colors interactive" target="_blank" rel="noopener noreferrer"><FaInstagram className="w-5 h-5" /></a>
             <a href="#" className="hover:text-[#00d2ff] transition-colors interactive"><FaLinkedin className="w-5 h-5" /></a>
-            <a href="#" className="hover:text-[#00d2ff] transition-colors interactive"><FaYoutube className="w-5 h-5" /></a>
-            <a href="#" className="hover:text-[#00d2ff] transition-colors interactive"><FaGithub className="w-5 h-5" /></a>
             <a href={`mailto:${contacts.clubEmail}`} className="hover:text-[#00d2ff] transition-colors interactive"><Mail className="w-5 h-5" /></a>
           </div>
 

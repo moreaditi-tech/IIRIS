@@ -1,21 +1,25 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
+import ImageModal from "./ImageModal";
 
 const guidanceData = [
   {
     name: "Dr. Sonali Patil",
     role: "HOD",
     department: "Department of Computer Engineering",
-    image: "/images/hod.jpg",
+    image: "/images/sonali.jpg",
   },
   {
     name: "Dr. Smita Khairnar",
     role: "IIRIS Club Coordinator",
     department: "Department of Computer Engineering",
-    image: "/images/coordinator.jpg",
+    image: "/images/Smita.png",
   }
 ];
 
 export default function Leadership() {
+  const [selectedImage, setSelectedImage] = useState(null);
+
   return (
     <section id="guidance" className="relative w-full py-24 bg-[#050505] overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6">
@@ -51,11 +55,16 @@ export default function Leadership() {
               {/* Data line animation on hover */}
               <div className="absolute top-0 left-0 w-0 h-[2px] bg-[#00d2ff] group-hover:w-full transition-all duration-700 ease-out z-10 pointer-events-none"></div>
               
-              <div className="relative w-full aspect-[4/5] overflow-hidden mb-6 bg-[#111]">
+              <div 
+                className="relative w-full aspect-[4/5] overflow-hidden mb-6 bg-[#111] cursor-pointer"
+                onClick={() => setSelectedImage(member.image)}
+              >
                 <img 
                   src={member.image} 
                   alt={member.name}
-                  className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover filter transition-all duration-700 group-hover:scale-105"
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMTExIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNSIgZmlsbD0iIzMzMyIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SU1BR0UgVE8gQkUgQURERUQ8L3RleHQ+PC9zdmc+";
@@ -83,6 +92,7 @@ export default function Leadership() {
         </div>
 
       </div>
+      <ImageModal selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
     </section>
   );
 }

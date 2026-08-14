@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import ImageModal from "./ImageModal";
 import { projects } from "../data/projects";
 
 // Simple helper to generate an IoT diagram based on technologies
@@ -19,8 +20,37 @@ const generateDiagram = (technologies) => {
   return flow;
 };
 
+// Robust Image Component that handles errors via React state
+const ProjectImage = ({ src, title, className }) => {
+  const [error, setError] = useState(false);
+  
+  return (
+    <>
+      {!error && (
+        <img 
+          src={src} 
+          alt={title} 
+          loading="lazy"
+          decoding="async"
+          className={className}
+          onError={() => setError(true)}
+        />
+      )}
+      {error && (
+        <div className="absolute inset-0 bg-[#111] flex flex-col items-center justify-center">
+          <div className="text-[#00d2ff] opacity-50 mb-2">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <div className="font-mono text-[10px] tracking-[0.2em] text-gray-600 uppercase text-center px-4">IIRIS PROJECT LAB</div>
+        </div>
+      )}
+    </>
+  );
+};
+
 export default function ProjectsGallery() {
   const [selectedProject, setSelectedProject] = useState(null);
+  const [fullScreenImage, setFullScreenImage] = useState(null);
   const scrollRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -64,6 +94,7 @@ export default function ProjectsGallery() {
             <button 
               onClick={() => scroll("left")} 
               disabled={!canScrollLeft}
+              aria-label="Scroll left"
               className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors interactive ${canScrollLeft ? 'border-white/30 text-white hover:border-[#00d2ff] hover:text-[#00d2ff]' : 'border-white/10 text-white/20 cursor-not-allowed'}`}
             >
               <ChevronLeft className="w-5 h-5" />
@@ -71,6 +102,7 @@ export default function ProjectsGallery() {
             <button 
               onClick={() => scroll("right")} 
               disabled={!canScrollRight}
+              aria-label="Scroll right"
               className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors interactive ${canScrollRight ? 'border-white/30 text-white hover:border-[#00d2ff] hover:text-[#00d2ff]' : 'border-white/10 text-white/20 cursor-not-allowed'}`}
             >
               <ChevronRight className="w-5 h-5" />
@@ -95,24 +127,11 @@ export default function ProjectsGallery() {
               className="snap-center shrink-0 w-[85vw] md:w-[400px] bg-[#0a0a0a] border border-white/5 hover:border-[#00d2ff]/30 rounded-lg overflow-hidden group cursor-pointer transition-all duration-300 flex flex-col interactive"
             >
               <div className="relative h-48 overflow-hidden bg-[#111] flex items-center justify-center">
-                <img 
-                  src={`/images/projects/project_${project.id}.jpg`} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'flex';
-                  }}
+                <ProjectImage 
+                  src={project.image} 
+                  title={project.title} 
+                  className="w-full h-full object-cover opacity-100 group-hover:scale-105 transition-all duration-700" 
                 />
-                {/* Premium Placeholder if Image Fails */}
-                <div className="absolute inset-0 bg-[#111] flex-col items-center justify-center hidden" style={{display: 'none'}}>
-                  <div className="text-[#00d2ff] opacity-50 mb-2">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-                  </div>
-                  <div className="font-mono text-[10px] tracking-[0.2em] text-gray-600 uppercase">PROJECT IMAGE</div>
-                </div>
-                
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
                 
                 {/* Data line animation on hover */}
                 <div className="absolute bottom-0 left-0 h-[1px] bg-[#00d2ff] w-0 group-hover:w-full transition-all duration-500 ease-out"></div>
@@ -165,6 +184,7 @@ export default function ProjectsGallery() {
             >
               <button 
                 onClick={() => setSelectedProject(null)}
+                aria-label="Close modal"
                 className="absolute top-4 right-4 p-2 bg-black/50 hover:bg-[#00d2ff]/20 rounded-full text-white hover:text-[#00d2ff] transition-colors z-20 interactive"
               >
                 <X className="w-5 h-5" />
@@ -172,24 +192,15 @@ export default function ProjectsGallery() {
 
               {/* Left Side: Image & Architecture */}
               <div className="w-full md:w-2/5 flex flex-col border-r border-white/5 bg-[#0a0a0a]">
-                <div className="h-64 md:h-80 bg-[#111] relative overflow-hidden flex items-center justify-center">
-                  <img 
-                    src={`/images/projects/project_${selectedProject.id}.jpg`} 
-                    alt={selectedProject.title} 
-                    className="w-full h-full object-cover opacity-80"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'flex';
-                    }}
+                <div 
+                  className="h-64 md:h-80 bg-[#111] relative overflow-hidden flex items-center justify-center cursor-pointer"
+                  onClick={() => setFullScreenImage(selectedProject.image)}
+                >
+                  <ProjectImage 
+                    src={selectedProject.image} 
+                    title={selectedProject.title} 
+                    className="w-full h-full object-cover opacity-100" 
                   />
-                  {/* Premium Placeholder */}
-                  <div className="absolute inset-0 bg-[#111] flex-col items-center justify-center hidden" style={{display: 'none'}}>
-                    <div className="text-[#00d2ff] opacity-50 mb-2">
-                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-                    </div>
-                    <div className="font-mono text-xs tracking-[0.2em] text-gray-600 uppercase">PROJECT IMAGE</div>
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
                 </div>
 
                 {/* IoT Architecture Diagram */}
@@ -262,6 +273,7 @@ export default function ProjectsGallery() {
           </motion.div>
         )}
       </AnimatePresence>
+      <ImageModal selectedImage={fullScreenImage} setSelectedImage={setFullScreenImage} />
     </section>
   );
 }

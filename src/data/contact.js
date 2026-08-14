@@ -1,13 +1,13 @@
 export const contacts = {
-  secretary: {
-    name: "Janvi Mahanwar",
-    role: "Secretary",
-    email: "[EMAIL TO BE ADDED]"
+  president: {
+    name: "Pratik Lanjewar",
+    role: "President",
+    email: "pratiklanjewar22@gmail.com"
   },
-  coSecretary: {
-    name: "Kanad Muley",
-    role: "Co-Secretary",
-    email: "[EMAIL TO BE ADDED]"
+  vicePresident: {
+    name: "Tejas Bankar",
+    role: "Vice President",
+    email: "tejasbankar58@gmail.com"
   },
-  clubEmail: "[CLUB EMAIL TO BE ADDED]"
+  clubEmail: "iotclubpccoe@gmail.com"
 };

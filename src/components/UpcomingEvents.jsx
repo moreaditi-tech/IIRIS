@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
+import ImageModal from "./ImageModal";
 import { Calendar, Clock, MapPin, Users, ArrowRight, CircleDot } from "lucide-react";
 import { upcomingEvents } from "../data/upcomingEvents";
 
 export default function UpcomingEvents() {
+  const [selectedImage, setSelectedImage] = useState(null);
+
   if (!upcomingEvents || upcomingEvents.length === 0) return null;
 
   const event = upcomingEvents[0]; // For now, display the first upcoming event
@@ -47,12 +51,17 @@ export default function UpcomingEvents() {
           <div className="flex flex-col lg:flex-row">
             
             {/* Left: Image Area */}
-            <div className="w-full lg:w-[45%] relative aspect-video lg:aspect-auto overflow-hidden">
-              <div className="absolute inset-0 bg-[#050505]">
+            <div 
+              className="w-full lg:w-[45%] relative aspect-video lg:aspect-auto overflow-hidden cursor-pointer"
+              onClick={() => setSelectedImage(event.image)}
+            >
+              <div className="absolute inset-0 bg-[#050505] flex items-center justify-center p-4 md:p-8">
                 <img 
                   src={event.image} 
                   alt={event.title} 
-                  className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700 mix-blend-luminosity hover:mix-blend-normal"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-contain opacity-100 group-hover:scale-105 transition-all duration-700"
                 />
               </div>
               
@@ -145,6 +154,7 @@ export default function UpcomingEvents() {
           </div>
         </motion.div>
       </div>
+      <ImageModal selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
     </section>
   );
 }

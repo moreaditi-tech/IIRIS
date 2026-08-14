@@ -1,12 +1,14 @@
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Trophy } from "lucide-react";
+import ImageModal from "./ImageModal";
 import { achievements } from "../data/achievements";
 
 export default function Achievements() {
   const scrollRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const checkScroll = () => {
     if (scrollRef.current) {
@@ -47,6 +49,7 @@ export default function Achievements() {
             <button 
               onClick={() => scroll("left")} 
               disabled={!canScrollLeft}
+              aria-label="Scroll left"
               className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors interactive ${canScrollLeft ? 'border-white/30 text-white hover:border-[#00d2ff] hover:text-[#00d2ff]' : 'border-white/10 text-white/20 cursor-not-allowed'}`}
             >
               <ChevronLeft className="w-5 h-5" />
@@ -54,6 +57,7 @@ export default function Achievements() {
             <button 
               onClick={() => scroll("right")} 
               disabled={!canScrollRight}
+              aria-label="Scroll right"
               className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors interactive ${canScrollRight ? 'border-white/30 text-white hover:border-[#00d2ff] hover:text-[#00d2ff]' : 'border-white/10 text-white/20 cursor-not-allowed'}`}
             >
               <ChevronRight className="w-5 h-5" />
@@ -76,14 +80,17 @@ export default function Achievements() {
               transition={{ delay: Math.min(idx * 0.1, 0.4) }}
               className="snap-center shrink-0 w-[85vw] md:w-[600px] bg-[#0a0a0a] border border-white/5 flex flex-col md:flex-row items-center rounded-lg overflow-hidden group hover:border-[#00d2ff]/30 transition-all duration-300"
             >
-              <div className="w-full md:w-2/5 h-48 md:h-full relative overflow-hidden bg-black shrink-0">
+              <div 
+                className="w-full md:w-1/2 h-48 md:h-full relative overflow-hidden bg-black shrink-0 cursor-pointer"
+                onClick={() => setSelectedImage(achievement.image)}
+              >
                 <img 
                   src={achievement.image} 
                   alt={achievement.title} 
-                  className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover opacity-100 transition-opacity duration-500 hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0a0a0a] hidden md:block"></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent md:hidden"></div>
               </div>
               
               <div className="p-6 md:p-8 flex flex-col justify-center flex-grow w-full relative">
@@ -109,6 +116,8 @@ export default function Achievements() {
           ))}
         </div>
       </div>
+
+      <ImageModal selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
     </section>
   );
 }

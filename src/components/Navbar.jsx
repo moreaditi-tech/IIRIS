@@ -59,6 +59,7 @@ export default function Navbar() {
           <button 
             className="md:hidden text-white interactive"
             onClick={() => setMobileMenuOpen(true)}
+            aria-label="Toggle mobile menu"
           >
             <Menu className="w-6 h-6" />
           </button>
@@ -80,6 +81,7 @@ export default function Navbar() {
               <button 
                 onClick={() => setMobileMenuOpen(false)}
                 className="text-white"
+                aria-label="Close mobile menu"
               >
                 <X className="w-6 h-6" />
               </button>

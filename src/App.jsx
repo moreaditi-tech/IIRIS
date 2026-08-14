@@ -1,18 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import BootSequence from "./components/BootSequence";
 import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import About from "./components/About";
-import Categories from "./components/Categories";
-import ProjectsGallery from "./components/ProjectsGallery";
-import Events from "./components/Events";
-import Achievements from "./components/Achievements";
-import UpcomingEvents from "./components/UpcomingEvents";
-import Team from "./components/Team";
-import Leadership from "./components/Leadership";
-import CallToAction from "./components/CallToAction";
-import Footer from "./components/Footer";
+
+const About = lazy(() => import("./components/About"));
+const Categories = lazy(() => import("./components/Categories"));
+const ProjectsGallery = lazy(() => import("./components/ProjectsGallery"));
+const Events = lazy(() => import("./components/Events"));
+const Achievements = lazy(() => import("./components/Achievements"));
+const UpcomingEvents = lazy(() => import("./components/UpcomingEvents"));
+const Team = lazy(() => import("./components/Team"));
+const Leadership = lazy(() => import("./components/Leadership"));
+const CallToAction = lazy(() => import("./components/CallToAction"));
+const Footer = lazy(() => import("./components/Footer"));
 
 function App() {
   const [isBooting, setIsBooting] = useState(true);
@@ -40,18 +41,22 @@ function App() {
       
       <main>
         <Hero />
-        <About />
-        <Categories />
-        <ProjectsGallery />
-        <Events />
-        <Achievements />
-        <UpcomingEvents />
-        <Leadership />
-        <Team />
-        <CallToAction />
+        <Suspense fallback={<div className="h-20 w-full"></div>}>
+          <About />
+          <Categories />
+          <ProjectsGallery />
+          <Events />
+          <Achievements />
+          <UpcomingEvents />
+          <Leadership />
+          <Team />
+          <CallToAction />
+        </Suspense>
       </main>
       
-      <Footer />
+      <Suspense fallback={<div className="h-20 w-full"></div>}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }

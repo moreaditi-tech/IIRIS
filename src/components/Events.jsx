@@ -1,12 +1,14 @@
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import ImageModal from "./ImageModal";
 import { events } from "../data/events";
 
 export default function Events() {
   const scrollRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const checkScroll = () => {
     if (scrollRef.current) {
@@ -47,6 +49,7 @@ export default function Events() {
             <button 
               onClick={() => scroll("left")} 
               disabled={!canScrollLeft}
+              aria-label="Scroll left"
               className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors interactive ${canScrollLeft ? 'border-white/30 text-white hover:border-[#00d2ff] hover:text-[#00d2ff]' : 'border-white/10 text-white/20 cursor-not-allowed'}`}
             >
               <ChevronLeft className="w-5 h-5" />
@@ -54,6 +57,7 @@ export default function Events() {
             <button 
               onClick={() => scroll("right")} 
               disabled={!canScrollRight}
+              aria-label="Scroll right"
               className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors interactive ${canScrollRight ? 'border-white/30 text-white hover:border-[#00d2ff] hover:text-[#00d2ff]' : 'border-white/10 text-white/20 cursor-not-allowed'}`}
             >
               <ChevronRight className="w-5 h-5" />
@@ -81,11 +85,16 @@ export default function Events() {
               <div className="absolute top-[-4px] left-4 w-[9px] h-[9px] rounded-full bg-[#050505] border-2 border-[#00d2ff] z-10 group-hover:bg-[#00d2ff] group-hover:shadow-[0_0_10px_#00d2ff] transition-all"></div>
               
               <div className="mt-8 bg-[#111] border border-white/5 rounded-lg overflow-hidden flex flex-col flex-grow hover:border-[#00d2ff]/30 transition-colors duration-300">
-                <div className="h-48 relative overflow-hidden bg-black">
+                <div 
+                  className="h-48 relative overflow-hidden bg-black cursor-pointer"
+                  onClick={() => setSelectedImage(event.image)}
+                >
                   <img 
                     src={event.image} 
                     alt={event.title} 
-                    className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover opacity-100 group-hover:scale-105 transition-all duration-700"
                   />
                 </div>
                 
@@ -100,6 +109,7 @@ export default function Events() {
           ))}
         </div>
       </div>
+      <ImageModal selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
     </section>
   );
 }

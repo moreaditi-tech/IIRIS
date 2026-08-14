@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
+import ImageModal from "./ImageModal";
 import { teamData } from "../data/team";
 
 export default function Team() {
+  const [selectedImage, setSelectedImage] = useState(null);
+
   return (
     <section id="team" className="relative w-full py-24 bg-[#020202] overflow-hidden border-t border-white/5">
       <div className="max-w-[1400px] mx-auto px-6">
@@ -33,11 +37,16 @@ export default function Team() {
               className="group relative bg-[#0a0a0a] border border-white/5 p-4 md:p-5 flex flex-col interactive overflow-hidden transition-all duration-500 hover:border-[#00d2ff]/50 hover:shadow-[0_0_20px_rgba(0,210,255,0.05)]"
             >
               {/* Image Area - 60% of card roughly */}
-              <div className="relative w-full aspect-[3/4] overflow-hidden mb-6 bg-[#111]">
+              <div 
+                className="relative w-full aspect-[3/4] overflow-hidden mb-6 bg-[#111] cursor-pointer"
+                onClick={() => setSelectedImage(member.image)}
+              >
                 <img 
                   src={member.image} 
                   alt={member.name}
-                  className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover filter transition-all duration-700 group-hover:scale-105"
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMTExIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNSIgZmlsbD0iIzMzMyIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SU1BR0UgVE8gQkUgQURERUQ8L3RleHQ+PC9zdmc+";
@@ -71,6 +80,7 @@ export default function Team() {
         </div>
 
       </div>
+      <ImageModal selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
     </section>
   );
 }
