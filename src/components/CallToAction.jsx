@@ -2,6 +2,7 @@ import { useState, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import ErrorBoundary from "./ErrorBoundary";
+import ModelErrorBoundary from "./ModelErrorBoundary";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import DroneModel from "./DroneModel";
@@ -22,11 +23,13 @@ export default function CallToAction() {
             <pointLight position={[0, -2, 2]} intensity={2} color="#00d2ff" distance={10} />
             <pointLight position={[0, 2, -2]} intensity={1} color="#ffffff" distance={10} />
           
-          <Suspense fallback={null}>
-            <group position={[0, -1, 0]}>
-              <DroneModel scale={1.2} />
-            </group>
-          </Suspense>
+          <ModelErrorBoundary>
+            <Suspense fallback={null}>
+              <group position={[0, -1, 0]}>
+                <DroneModel scale={1.2} />
+              </group>
+            </Suspense>
+          </ModelErrorBoundary>
           
           <OrbitControls 
             enableZoom={false} 

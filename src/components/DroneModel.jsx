@@ -1,6 +1,6 @@
 import { useRef, useState, useMemo, useEffect } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useGLTF, Html } from "@react-three/drei";
+import { useGLTF, Html, Clone } from "@react-three/drei";
 import * as THREE from "three";
 
 export default function DroneModel({ scale = 1, isMobile = false, onActivate }) {
@@ -142,7 +142,7 @@ export default function DroneModel({ scale = 1, isMobile = false, onActivate }) 
     >
       <group ref={droneMesh}>
         {/* Actual GLB Model */}
-        <primitive object={modelRoot} />
+        <Clone object={modelRoot} />
 
         {/* Sensor Scan Cone (placed relative to drone) */}
         <mesh ref={scanCone} position={[0, -0.5, 0]} rotation={[Math.PI, 0, 0]}>
