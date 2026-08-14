@@ -12,9 +12,9 @@ export const teamData = [
     image: "/images/Tejas.jpeg",
   },
   {
-    name: "Janvi Mahanwar",
+    name: "Janvi Maharnawar",
     role: "Secretary",
-    department: "Computer Engineering",
+    department: "Computer Science Engineering AI&ML",
     image: "/images/Janvi.jpeg",
   },
   {
@@ -26,25 +26,25 @@ export const teamData = [
   {
     name: "V Taraksh Prijay",
     role: "Project Development Head",
-    department: "Computer Engineering",
+    department: "Electronics & Telecommunication Engineering",
     image: "/images/Taraksh.jpeg",
   },
   {
     name: "Mayank Bahekar",
     role: "Project Design Head",
-    department: "Computer Engineering",
+    department: "Electronics & Telecommunication Engineering",
     image: "/images/Mayank.jpeg",
   },
   {
-    name: "Atharv Huigol",
+    name: "Atharv Huilgol",
     role: "Research and Innovation",
-    department: "Computer Engineering",
+    department: "Electronics & Telecommunication Engineering",
     image: "/images/Athrava.jpeg",
   },
   {
     name: "Mohit Desale",
     role: "Design Head",
-    department: "Computer Engineering",
+    department: "Electronics & Telecommunication Engineering",
     image: "/images/Mohit.jpeg",
   },
   {
@@ -61,7 +61,7 @@ export const teamData = [
   },
   {
     name: "Aditi More",
-    role: "Application Developer Head",
+    role: "Application Development",
     department: "Computer Engineering",
     image: "/images/Aditi.jpeg",
   }
