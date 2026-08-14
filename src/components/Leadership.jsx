@@ -7,7 +7,7 @@ const guidanceData = [
     name: "Dr. Sonali Patil",
     role: "HOD",
     department: "Department of Computer Engineering",
-    image: "/images/sonali.jpg",
+    image: "/images/HODD.png",
   },
   {
     name: "Dr. Smita Khairnar",
