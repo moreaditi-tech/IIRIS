@@ -61,7 +61,7 @@ export const teamData = [
   },
   {
     name: "Aditi More",
-    role: "Application Development",
+    role: "Application Development Head",
     department: "Computer Engineering",
     image: "/images/Aditi.jpeg",
   }
